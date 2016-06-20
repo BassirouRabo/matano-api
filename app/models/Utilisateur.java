@@ -38,7 +38,7 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public List<Utilisateur> findList() {
+    public List findList() {
         try {
             return JPA.em().createQuery("select utilisateur From Utilisateur utilisateur").getResultList();
         } catch (Exception e) {
