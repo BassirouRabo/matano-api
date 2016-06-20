@@ -24,7 +24,7 @@ public class HomeController extends Controller {
 
         utilisateur.setEmail("Karim");
         utilisateur.setTelephone("92332322");
-        utilisateur.create(utilisateur);
+        //utilisateur.create(utilisateur);
 
 
         return ok(index.render("Your new application is ready."));
