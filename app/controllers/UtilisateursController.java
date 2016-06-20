@@ -18,7 +18,7 @@ public class UtilisateursController extends Controller {
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
             System.out.println("form erreur ");
-            return ok("erreur");
+            return ok("0");
         }else{
             System.out.println("form ok ");
             Utilisateur utilisateur = form.get();

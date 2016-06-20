@@ -20,10 +20,13 @@ public class HomeController extends Controller {
      */
     @Transactional
     public Result index() {
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setEmail("bachir");
-        utilisateur.setTelephone("92");
+       Utilisateur utilisateur = new Utilisateur();
+
+        utilisateur.setEmail("Karim");
+        utilisateur.setTelephone("92332322");
         utilisateur.create(utilisateur);
+
+
         return ok(index.render("Your new application is ready."));
     }
 
