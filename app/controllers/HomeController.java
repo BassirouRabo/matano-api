@@ -1,5 +1,7 @@
 package controllers;
 
+import models.Utilisateur;
+import play.db.jpa.Transactional;
 import play.mvc.*;
 
 import views.html.*;
@@ -16,7 +18,12 @@ public class HomeController extends Controller {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+    @Transactional
     public Result index() {
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setEmail("bachir");
+        utilisateur.setTelephone("92");
+        utilisateur.create(utilisateur);
         return ok(index.render("Your new application is ready."));
     }
 
