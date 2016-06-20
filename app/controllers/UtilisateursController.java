@@ -15,14 +15,18 @@ public class UtilisateursController extends Controller {
     public Result inscription(){
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
-            return badRequest();
+            System.out.println("form erreur ");
+            return ok("erreur");
         }else{
+            System.out.println("form ok ");
             Utilisateur utilisateur = form.get();
             String result = utilisateur.create(utilisateur);
             if(result == null){
-                return ok("done");
+                System.out.println("result == null ");
+                return ok("1");
             }else{
-                return badRequest();
+                System.out.println("result != null ");
+                return ok("0");
             }
         }
     }
