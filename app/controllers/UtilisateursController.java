@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import models.Utilisateur;
 import play.data.Form;
 import play.data.FormFactory;
+import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -12,6 +13,7 @@ public class UtilisateursController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    @Transactional
     public Result inscription(){
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
@@ -31,6 +33,7 @@ public class UtilisateursController extends Controller {
         }
     }
 
+    @Transactional
     public Result connexion(){
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
