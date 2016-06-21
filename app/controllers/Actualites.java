@@ -1,7 +1,6 @@
 package controllers;
 
 
-import com.google.inject.Inject;
 import models.Actualite;
 import play.data.Form;
 import play.data.FormFactory;
@@ -9,6 +8,8 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import javax.inject.Inject;
 
 public class Actualites extends Controller {
     @Inject
