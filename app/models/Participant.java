@@ -64,6 +64,47 @@ public class Participant {
 
     /**
      * @param idEvenement
+     * @param telephone
+     * @return
+     */
+    public Participant findByEvenementAndUtilisateur(Long idEvenement, String telephone) {
+        String result = existeEvenenementAndUtilisateur(idEvenement, telephone);
+
+        if (result != null) {
+            return null;
+        } else {
+            Long idUtilisateur = new Utilisateur().findByTelephone(telephone).getId();
+            try {
+                return (Participant) JPA.em().createQuery("select participant From Participant participant WHERE participant.evenement.id= :idEvenement and participant.utilisateur.id = :idUtilisateur").setParameter("idEvenement", idEvenement).setParameter("idUtilisateur", idUtilisateur).getSingleResult();
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                return null;
+            }
+        }
+    }
+
+    /**
+     * @param idEvenement
+     * @param telephone
+     * @return
+     */
+    public String existeEvenenementAndUtilisateur(Long idEvenement, String telephone) {
+        Utilisateur utilisateur = new Utilisateur().findByTelephone(telephone);
+
+        if (utilisateur == null) {
+            return "aucun enregistrement correspondant";
+        } else {
+            Evenement evenement = new Evenement().findById(idEvenement);
+            if (evenement == null) {
+                return "aucun enregistrement correspondant";
+            } else {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * @param idEvenement
      * @return
      */
     public List findListByEvenement(Long idEvenement) {
@@ -89,15 +130,21 @@ public class Participant {
             if (evenement == null) {
                 return "aucun enregistrement correspondant";
             } else {
-                participant.setUtilisateur(utilisateur);
-                String result = null;
-                try {
-                    JPA.em().persist(participant);
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                    result = e.toString();
+
+                Participant participantOld = findByEvenementAndUtilisateur(evenement.getId(), utilisateur.getTelephone());
+                if (participantOld != null) {
+                    return "aucun enregistrement correspondant";
+                } else {
+                    participant.setUtilisateur(utilisateur);
+                    String result = null;
+                    try {
+                        JPA.em().persist(participant);
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                        result = e.toString();
+                    }
+                    return result;
                 }
-                return result;
             }
         }
     }
