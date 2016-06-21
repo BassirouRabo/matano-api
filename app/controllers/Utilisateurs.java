@@ -9,7 +9,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 
-public class UtilisateursController extends Controller {
+public class Utilisateurs extends Controller {
     @Inject
     FormFactory formFactory;
 
