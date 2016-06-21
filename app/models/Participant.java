@@ -50,6 +50,24 @@ public class Participant {
     }
 
     /**
+     *
+     * @param participant
+     * @return
+     */
+    public Participant transformation(Participant participant) {
+        Utilisateur utilisateur = new Utilisateur().findById(participant.getUtilisateur().getId());
+        if (utilisateur == null) {
+            return null;
+        } else {
+            participant.setNom(utilisateur.getNom());
+            participant.setPrenom(utilisateur.getPrenom());
+            participant.setTelephone(utilisateur.getTelephone());
+            participant.setImage(utilisateur.getImage());
+            return participant;
+        }
+    }
+
+    /**
      * @param idEvenement
      * @return
      */

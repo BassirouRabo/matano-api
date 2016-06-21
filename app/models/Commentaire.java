@@ -55,6 +55,24 @@ public class Commentaire {
     }
 
     /**
+     *
+     * @param commentaire
+     * @return
+     */
+    public Commentaire transformation(Commentaire commentaire){
+        Utilisateur utilisateur = new Utilisateur().findById(commentaire.getUtilisateur().getId());
+        if(utilisateur == null){
+            return null;
+        }else {
+            commentaire.setNom(utilisateur.getNom());
+            commentaire.setPrenom(utilisateur.getPrenom());
+            commentaire.setTelephone(utilisateur.getTelephone());
+            commentaire.setImage(utilisateur.getImage());
+            return commentaire;
+        }
+    }
+
+    /**
      * @param idEvenement
      * @return
      */

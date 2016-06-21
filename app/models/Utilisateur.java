@@ -23,14 +23,17 @@ public class Utilisateur {
     private String email;
     @Column(name = "presentation")      // text
     private String presentation;
+    @Column(name = "image")
+    private String image;
 
-    public Utilisateur(String nom, String prenom, String telephone, String password, String email, String presentation) {
+    public Utilisateur(String nom, String prenom, String telephone, String password, String email, String presentation, String image) {
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
         this.password = password;
         this.email = email;
         this.presentation = presentation;
+        this.image = image;
     }
 
     public Utilisateur(String telephone, String password) {
@@ -135,6 +138,7 @@ public class Utilisateur {
             utilisateurNew.setPassword(utilisateur.getPassword());
             utilisateurNew.setEmail(utilisateur.getEmail());
             utilisateurNew.setPresentation(utilisateur.getPresentation());
+            utilisateurNew.setImage(utilisateur.getImage());
 
             try {
                 JPA.em().persist(utilisateurNew);
@@ -220,5 +224,13 @@ public class Utilisateur {
 
     public void setPresentation(String presentation) {
         this.presentation = presentation;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

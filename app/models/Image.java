@@ -55,6 +55,24 @@ public class Image {
     }
 
     /**
+     *
+     * @param image
+     * @return
+     */
+    public Image transformation(Image image) {
+        Utilisateur utilisateur = new Utilisateur().findById(image.getUtilisateur().getId());
+        if (utilisateur == null) {
+            return null;
+        } else {
+            image.setNom(utilisateur.getNom());
+            image.setPrenom(utilisateur.getPrenom());
+            image.setTelephone(utilisateur.getTelephone());
+            image.setImage(utilisateur.getImage());
+            return image;
+        }
+    }
+
+    /**
      * @param idEvenement
      * @return
      */
