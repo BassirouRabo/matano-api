@@ -4,6 +4,7 @@ import play.db.jpa.JPA;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "participant")
@@ -51,6 +52,20 @@ public class Participant {
 
     /**
      *
+     * @param idUtilisateur
+     * @return
+     */
+    public List findListByUtilisateur(Long idUtilisateur) {
+        try {
+            return JPA.em().createQuery("select participant From Participant participant where participant.utilisateur.id = :idUtilisateur").setParameter("idUtilisateur", idUtilisateur).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
+     *
      * @param participant
      * @return
      */
@@ -65,6 +80,16 @@ public class Participant {
             participant.setImage(utilisateur.getImage());
             return participant;
         }
+    }
+
+    /**
+     * @param participants
+     * @return
+     */
+    public List<Participant> transformationListe(List<Participant> participants) {
+        System.out.print("" + participants.size());
+
+        return participants.stream().map(this::transformation).collect(Collectors.toList());
     }
 
     /**

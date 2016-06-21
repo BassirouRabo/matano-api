@@ -7,6 +7,7 @@ GET         /                                            controllers.Home.index
 # Evenement
 GET         /evenements                                  controllers.Evenements.reads()
 GET         /evenements/categories/:categorie            controllers.Evenements.readsByCategorie(categorie: String)
+GET        /evenements/utilisateurs/:idUtilisateur        controllers.Evenements.readsByUtilisateur(idUtilisateur: Long)
 GET         /evenements/:id                              controllers.Evenements.read(id: Long)
 POST        /evenements                                  controllers.Evenements.create()
 POST        /evenements/update                         controllers.Evenements.update()
@@ -32,7 +33,7 @@ GET         /commentaires/:id/delete                   controllers.Commentaires.
 
 
 # Participant
-GET         /particiapants                               controllers.Participants.reads()
+GET        /participants                                  controllers.Participants.reads()
 GET         /participants/:id                            controllers.Participants.read(id: Long)
 GET         /participants/evenements/:idEvenement        controllers.Participants.readsByEvenement(idEvenement: Long)
 POST        /participants                                controllers.Participants.create()

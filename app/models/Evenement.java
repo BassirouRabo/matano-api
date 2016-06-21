@@ -5,6 +5,7 @@ import play.db.jpa.JPA;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "evenement")
@@ -75,6 +76,15 @@ public class Evenement {
             return null;
         }
 
+    }
+
+    /**
+     * @param idUtilisateur
+     * @return
+     */
+    public List findListByUtilisateur(Long idUtilisateur) {
+        List<Participant> participants = new Participant().findListByUtilisateur(idUtilisateur);
+        return participants.stream().map(participant -> new Evenement().findById(participant.getEvenement().getId())).collect(Collectors.toList());
     }
 
     /**

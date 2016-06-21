@@ -33,7 +33,11 @@ public class Evenements extends Controller {
         } else {
             return ok(Json.toJson(evenement));
         }
+    }
 
+    @Transactional
+    public Result readsByUtilisateur(Long idUtilisateur){
+        return ok(Json.toJson(new Evenement().findListByUtilisateur(idUtilisateur)));
     }
 
     @Transactional
