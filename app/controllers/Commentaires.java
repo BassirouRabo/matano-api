@@ -7,6 +7,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import pojo.CommentairePojo;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ public class Commentaires extends Controller {
 
     @Transactional
     public Result reads() {
-        return ok(Json.toJson(new Commentaire().findList()));
+        return ok(Json.toJson(new CommentairePojo().tranformationListe(new Commentaire().findList())));
     }
 
     @Transactional
@@ -26,13 +27,13 @@ public class Commentaires extends Controller {
         if (commentaire == null) {
             return ok("0");
         } else {
-            return ok(Json.toJson(commentaire));
+            return ok(Json.toJson(new CommentairePojo().transformation(commentaire)));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
-        return ok(Json.toJson(new Commentaire().findListByEvenement(idEvenement)));
+        return ok(Json.toJson(new CommentairePojo().tranformationListe(new Commentaire().findListByEvenement(idEvenement))));
     }
 
     @Transactional

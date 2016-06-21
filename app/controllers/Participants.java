@@ -7,6 +7,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import pojo.ParticipantPojo;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,7 @@ public class Participants extends Controller {
 
     @Transactional
     public Result reads() {
-        return ok(Json.toJson(new Participant().findList()));
+        return ok(Json.toJson(new ParticipantPojo().transformationListe(new Participant().findList())));
     }
 
     @Transactional
@@ -25,13 +26,13 @@ public class Participants extends Controller {
         if (participant == null) {
             return ok("0");
         } else {
-            return ok(Json.toJson(participant));
+            return ok(Json.toJson(new ParticipantPojo().transformation(participant)));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
-        return ok(Json.toJson(new Participant().findListByEvenement(idEvenement)));
+        return ok(Json.toJson(new ParticipantPojo().transformationListe(new Participant().findListByEvenement(idEvenement))));
     }
 
     @Transactional

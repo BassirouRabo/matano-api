@@ -7,6 +7,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import pojo.ImagePojo;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ public class Images extends Controller {
 
     @Transactional
     public Result reads() {
-        return ok(Json.toJson(new Image().findList()));
+        return ok(Json.toJson(new ImagePojo().transformationListe(new Image().findList())));
     }
 
     @Transactional
@@ -26,13 +27,13 @@ public class Images extends Controller {
         if (image == null) {
             return ok("0");
         } else {
-            return ok(Json.toJson(image));
+            return ok(Json.toJson(new ImagePojo().transformation(image)));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
-        return ok(Json.toJson(new Image().findListByEvenement(idEvenement)));
+        return ok(Json.toJson(new ImagePojo().transformationListe(new Image().findListByEvenement(idEvenement))));
     }
 
     @Transactional
