@@ -21,7 +21,7 @@ public class Utilisateur {
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "presentation")
+    @Column(name = "presentation")      // text
     private String presentation;
 
     public Utilisateur(String nom, String prenom, String telephone, String password, String email, String presentation) {
@@ -38,6 +38,12 @@ public class Utilisateur {
         this.password = password;
     }
 
+    public Utilisateur() {
+    }
+
+    /**
+     * @return
+     */
     public List findList() {
         try {
             return JPA.em().createQuery("select utilisateur From Utilisateur utilisateur").getResultList();
@@ -47,9 +53,24 @@ public class Utilisateur {
         }
     }
 
-    public Utilisateur() {
+    /**
+     * @param id
+     * @return
+     */
+    public Utilisateur findById(Long id) {
+        try {
+            return (Utilisateur) JPA.em().createQuery("select utilisateur From Utilisateur utilisateur WHERE utilisateur.id = :id").setParameter("id", id).getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
     }
 
+    /**
+     *
+     * @param telephone
+     * @return
+     */
     public Utilisateur findByTelephone(String telephone) {
         try {
             return (Utilisateur)JPA.em().createQuery("select utilisateur From Utilisateur utilisateur WHERE utilisateur.telephone = :telephone").setParameter("telephone", telephone).getSingleResult();
@@ -59,6 +80,12 @@ public class Utilisateur {
         }
     }
 
+    /**
+     *
+     * @param telephone
+     * @param password
+     * @return
+     */
     public Utilisateur findByTelephoneAndPassword(String telephone, String password) {
         try {
             return (Utilisateur) JPA.em().createQuery("select utilisateur From Utilisateur utilisateur WHERE utilisateur.telephone = :telephone AND utilisateur.password = :password ").setParameter("telephone", telephone).setParameter("password", password).getSingleResult();
@@ -68,6 +95,11 @@ public class Utilisateur {
         }
     }
 
+    /**
+     *
+     * @param utilisateur
+     * @return
+     */
     public String create(Utilisateur utilisateur) {
         Utilisateur utilisateurOld = findByTelephone(utilisateur.getTelephone());
 
@@ -77,6 +109,55 @@ public class Utilisateur {
             String result = null;
             try {
                 JPA.em().persist(utilisateur);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                result = e.toString();
+            }
+            return result;
+        }
+    }
+
+    /**
+     * @param utilisateur
+     * @return
+     */
+    public String update(Utilisateur utilisateur) {
+        Utilisateur utilisateurNew = findById(utilisateur.getId());
+
+        if (utilisateurNew == null) {
+            return "aucun enregistrement correspondant";
+        } else {
+            String result = null;
+
+            utilisateurNew.setNom(utilisateur.getNom());
+            utilisateurNew.setPrenom(utilisateur.getPrenom());
+            utilisateurNew.setTelephone(utilisateur.getTelephone());
+            utilisateurNew.setPassword(utilisateur.getPassword());
+            utilisateurNew.setEmail(utilisateur.getEmail());
+            utilisateurNew.setPresentation(utilisateur.getPresentation());
+
+            try {
+                JPA.em().persist(utilisateurNew);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+                result = e.toString();
+            }
+            return result;
+        }
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    public String delete(Long id) {
+        Utilisateur utilisateur = findById(id);
+        if (utilisateur == null) {
+            return "aucun enregistrement correspondant";
+        } else {
+            String result = null;
+            try {
+                JPA.em().remove(utilisateur);
             } catch (Exception e) {
                 System.out.println(e.toString());
                 result = e.toString();

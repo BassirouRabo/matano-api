@@ -16,7 +16,7 @@ public class Actualite {
     private Long id;
     @Column(name = "jour")
     private Date jour;
-    @Column(name = "actualite")
+    @Column(name = "actualite")     // text
     private String actualite;
 
     /**

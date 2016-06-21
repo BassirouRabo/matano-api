@@ -18,7 +18,7 @@ public class Commentaire {
     private Long id;
     @Column(name = "jour")
     private Date jour;
-    @Column(name = "commentaire")
+    @Column(name = "commentaire")       // text
     private String commentaire;
     @Transient
     private String nom;

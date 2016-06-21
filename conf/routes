@@ -9,7 +9,8 @@ GET         /evenements                                  controllers.Evenements.
 GET         /evenements/categories/:categorie            controllers.Evenements.readsByCategorie(categorie: String)
 GET         /evenements/:id                              controllers.Evenements.read(id: Long)
 POST        /evenements                                  controllers.Evenements.create()
-GET        /evenements/:id/delete          controllers.Evenements.delete(id: Long)
+POST        /evenements/update                         controllers.Evenements.update()
+GET         /evenements/:id/delete                     controllers.Evenements.delete(id: Long)
 
 
 # Actualite
@@ -17,7 +18,8 @@ GET         /actualites                                  controllers.Actualites.
 GET         /actualites/:id                              controllers.Actualites.read(id: Long)
 GET         /actualites/evenements/:idEvenement          controllers.Actualites.readsByEvenement(idEvenement: Long)
 POST        /actualites                                  controllers.Actualites.create()
-GET        /actualites/:id/delete          controllers.Actualites.delete(id: Long)
+POST        /actualites/update                         controllers.Actualites.update()
+GET         /actualites/:id/delete                     controllers.Actualites.delete(id: Long)
 
 
 # Commentaire
@@ -25,7 +27,8 @@ GET         /commentaires                                controllers.Commentaire
 GET         /commentaires/:id                            controllers.Commentaires.read(id: Long)
 GET         /commentaires/evenements/:idEvenement        controllers.Commentaires.readsByEvenement(idEvenement: Long)
 POST        /commentaires                                controllers.Commentaires.create()
-GET        /commentaires/:id/delete        controllers.Commentaires.delete(id: Long)
+POST        /commentaires/update                       controllers.Commentaires.update()
+GET         /commentaires/:id/delete                   controllers.Commentaires.delete(id: Long)
 
 
 # Participant
@@ -33,18 +36,24 @@ GET         /particiapants                               controllers.Participant
 GET         /participants/:id                            controllers.Participants.read(id: Long)
 GET         /participants/evenements/:idEvenement        controllers.Participants.readsByEvenement(idEvenement: Long)
 POST        /participants                                controllers.Participants.create()
-GET        /participants/:id/delete        controllers.Participants.delete(id: Long)
+GET         /participants/:id/delete                   controllers.Participants.delete(id: Long)
 
 # Image
 GET         /images                                      controllers.Images.reads()
 GET         /images/:id                                  controllers.Images.read(id: Long)
 GET         /images/evenements/:idEvenement              controllers.Images.readsByEvenement(idEvenement: Long)
 POST        /images                                      controllers.Images.create()
-GET        /images/:id/delete              controllers.Images.delete(id: Long)
+GET         /images/:id/delete                         controllers.Images.delete(id: Long)
 
 
+# Utilisateur
 POST        /inscription                                 controllers.Utilisateurs.inscription()
 POST        /connexion                                   controllers.Utilisateurs.connexion()
+GET         /utilisateurs                              controllers.Utilisateurs.reads()
+GET         /utilisateurs/:id                          controllers.Utilisateurs.read(id : Long)
+GET         /utilisateurs/telephones/:telephone        controllers.Utilisateurs.readByTelephone(telephone: String)
+POST        /utilisateurs/update                       controllers.Utilisateurs.update()
+GET         /utilisateurs/:id/delete                   controllers.Utilisateurs.delete(id: Long)
 
 
 
@@ -52,4 +61,3 @@ POST        /connexion                                   controllers.Utilisateur
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # {"categorie": "Education", "rubrique" : "Formation", "titre": "Seminaire", "tarif" : "10000", "lieu" : "CCFN", "presentation": "Alelier de formation OHADA", "image" : "image3.jpg", "horaire" : "11H", "lien" : "www.formation.com", "jour": "", "video": "video3.mp4", "imagefull" : "imagefull3.jpg"}
-# {"jour" : "", "actualite": "deuxilème actualite", "evenement.id" : "11"}
