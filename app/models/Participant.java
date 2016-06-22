@@ -167,17 +167,22 @@ public class Participant {
         Utilisateur utilisateur = new Utilisateur().findById(participant.getUtilisateur().getId());
 
         if (utilisateur == null) {
+            System.out.println("utilisateur == null");
             return "aucun enregistrement correspondant";
         } else {
+            System.out.println("utilisateur != null");
             Evenement evenement = new Evenement().findById(participant.getEvenement().getId());
             if (evenement == null) {
+                System.out.println("evenement == null");
                 return "aucun enregistrement correspondant";
             } else {
-
+                System.out.println("evenement != null");
                 Participant participantOld = findByEvenementAndUtilisateur(evenement.getId(), utilisateur.getTelephone());
                 if (participantOld != null) {
+                    System.out.println("participantOld != null");
                     return "aucun enregistrement correspondant";
                 } else {
+                    System.out.println("participantOld == null");
                     participant.setUtilisateur(utilisateur);
                     String result = null;
                     try {
@@ -185,6 +190,7 @@ public class Participant {
                     } catch (Exception e) {
                         System.out.println(e.toString());
                         result = e.toString();
+                        System.out.println("erorr .." + e.toString());
                     }
                     return result;
                 }
