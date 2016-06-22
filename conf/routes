@@ -58,6 +58,10 @@ POST        /utilisateurs/update                       controllers.Utilisateurs.
 GET         /utilisateurs/:id/delete                   controllers.Utilisateurs.delete(id: Long)
 GET        /utilisateurs/:id/delete-account        controllers.Utilisateurs.deleteAccount(id: Long)
 
+# Feedback
+GET         /feedbacks        controllers.Feedbacks.reads()
+POST        /feedbacks        controllers.Feedbacks.create()
+
 
 
 # Map static resources from the /public folder to the /assets URL path
