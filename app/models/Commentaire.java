@@ -114,6 +114,7 @@ public class Commentaire {
                 return "aucun enregistrement correspondant";
             } else {
                 commentaire.setUtilisateur(utilisateur);
+                commentaire.setJour(new Date());
                 String result = null;
                 try {
                     JPA.em().persist(commentaire);
