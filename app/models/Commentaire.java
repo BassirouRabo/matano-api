@@ -103,7 +103,7 @@ public class Commentaire {
      * @return
      */
     public String create(Commentaire commentaire) {
-        Utilisateur utilisateur = new Utilisateur().findByTelephone(commentaire.getTelephone());
+        Utilisateur utilisateur = new Utilisateur().findById(commentaire.getUtilisateur().getId());
 
         if (utilisateur == null) {
             return "aucun enregistrement correspondant";
