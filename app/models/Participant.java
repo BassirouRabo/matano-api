@@ -164,7 +164,7 @@ public class Participant {
      * @return
      */
     public String create(Participant participant) {
-        Utilisateur utilisateur = new Utilisateur().findByTelephone(participant.getTelephone());
+        Utilisateur utilisateur = new Utilisateur().findById(participant.getUtilisateur().getId());
 
         if (utilisateur == null) {
             return "aucun enregistrement correspondant";
