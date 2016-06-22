@@ -99,6 +99,20 @@ public class Image {
     }
 
     /**
+     *
+     * @param idUtilisteur
+     * @return
+     */
+    public List findListByUtilisateur(Long idUtilisteur) {
+        try {
+            return JPA.em().createQuery("select image From Image image where image.utilisateur.id = :idUtilisteur").setParameter("idUtilisteur", idUtilisteur).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param image
      * @return
      */

@@ -56,6 +56,7 @@ GET         /utilisateurs/:id                          controllers.Utilisateurs.
 GET         /utilisateurs/telephones/:telephone        controllers.Utilisateurs.readByTelephone(telephone: String)
 POST        /utilisateurs/update                       controllers.Utilisateurs.update()
 GET         /utilisateurs/:id/delete                   controllers.Utilisateurs.delete(id: Long)
+GET        /utilisateurs/:id/delete-account        controllers.Utilisateurs.deleteAccount(id: Long)
 
 
 

@@ -99,6 +99,20 @@ public class Commentaire {
     }
 
     /**
+     *
+     * @param idUtilisateur
+     * @return
+     */
+    public List findListByUtilisateur(Long idUtilisateur) {
+        try {
+            return JPA.em().createQuery("select commentaire From Commentaire commentaire where commentaire.utilisateur.id = :idUtilisateur").setParameter("idUtilisateur", idUtilisateur).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param commentaire
      * @return
      */

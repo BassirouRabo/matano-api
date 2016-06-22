@@ -170,6 +170,48 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     */
+    public String deleteAccount(Long id) {
+        Utilisateur utilisateur = findById(id);
+        if (utilisateur == null) {
+            return "aucun enregistrement correspondant";
+        } else {
+
+            String resultParticipant;
+            List<Participant> participants = new Participant().findListByUtilisateur(id);
+            for (Participant participant : participants) {
+                resultParticipant = new Participant().delete(participant.getId());
+                if (resultParticipant != null) {
+                    return "erreur de suppression du participant " + participant.getId();
+                }
+            }
+
+            String resultCommentaire;
+            List<Commentaire> commentaires = new Commentaire().findListByUtilisateur(id);
+            for (Commentaire commentaire : commentaires) {
+                resultCommentaire = new Commentaire().delete(commentaire.getId());
+                if (resultCommentaire != null) {
+                    return "erreur de suppression du commentaire " + commentaire.getId();
+                }
+            }
+
+            String resultImage;
+            List<Image> images = new Image().findListByUtilisateur(id);
+            for (Image image : images) {
+                resultImage = new Image().delete(image.getId());
+                if (resultImage != null) {
+                    return "erreur de suppression du image " + image.getId();
+                }
+            }
+
+            return delete(id);
+
+        }
+    }
+
     public Long getId() {
         return id;
     }

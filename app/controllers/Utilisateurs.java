@@ -98,5 +98,15 @@ public class Utilisateurs extends Controller {
             return ok("1");
         }
     }
+
+    @Transactional
+    public Result deleteAccount(Long id) {
+        String result = new Utilisateur().deleteAccount(id);
+        if (result != null) {
+            return ok("0");
+        } else {
+            return ok("1");
+        }
+    }
 }
 
