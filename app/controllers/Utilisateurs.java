@@ -49,7 +49,7 @@ public class Utilisateurs extends Controller {
             Utilisateur utilisateur = form.get();
             String result = utilisateur.create(utilisateur);
             if(result == null){
-                return ok("1");
+                return ok(utilisateur.findByTelephone(utilisateur.getTelephone()).getId().toString());
             }else{
                 return ok("0");
             }
