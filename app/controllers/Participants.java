@@ -61,4 +61,14 @@ public class Participants extends Controller {
             return ok("1");
         }
     }
+
+    @Transactional
+    public Result deleteByEvenementAndUtilisateur(Long idEvenement, Long idUtilisateur){
+        String result = new Participant().deleteByEvenementAndUtilisateur(idEvenement, idUtilisateur);
+        if (result != null) {
+            return ok("0");
+        } else {
+            return ok("1");
+        }
+    }
 }

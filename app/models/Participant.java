@@ -212,6 +212,28 @@ public class Participant {
         }
     }
 
+
+    /**
+     * @param idEvenement
+     * @param idUtilisateur
+     * @return
+     */
+    public String deleteByEvenementAndUtilisateur(Long idEvenement, Long idUtilisateur) {
+        Utilisateur utilisateur = new Utilisateur().findById(idUtilisateur);
+
+        if (utilisateur == null) {
+            return "aucun enregistrement correspondant";
+        } else {
+            Participant participant = findByEvenementAndUtilisateur(idEvenement, utilisateur.getTelephone());
+
+            if (participant == null) {
+                return "aucun enregistrement correspondant";
+            } else {
+                return delete(participant.getId());
+            }
+        }
+    }
+
     public Long getId() {
         return id;
     }
