@@ -37,7 +37,7 @@ GET        /participants                                  controllers.Participan
 GET         /participants/:id                            controllers.Participants.read(id: Long)
 GET         /participants/evenements/:idEvenement        controllers.Participants.readsByEvenement(idEvenement: Long)
 POST        /participants                                controllers.Participants.create()
-GET         /participants/:id/delete                   controllers.Participants.delete(id: Long)
+GET        /participants/:id/delete        controllers.Participants.delete(id: Long)
 GET        /participants/evenements/:idEvenement/utilisateurs/:idUtilisateur        controllers.Participants.deleteByEvenementAndUtilisateur(idEvenement: Long, idUtilisateur: Long)
 
 # Image

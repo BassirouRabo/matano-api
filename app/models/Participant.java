@@ -24,6 +24,8 @@ public class Participant {
     private String image;
     @Transient
     private String telephone;
+    @Transient
+    private String presentation;
 
     /**
      * @return
@@ -78,6 +80,7 @@ public class Participant {
             participant.setPrenom(utilisateur.getPrenom());
             participant.setTelephone(utilisateur.getTelephone());
             participant.setImage(utilisateur.getImage());
+            participant.setPresentation(utilisateur.getPresentation());
             return participant;
         }
     }
@@ -87,8 +90,6 @@ public class Participant {
      * @return
      */
     public List<Participant> transformationListe(List<Participant> participants) {
-        System.out.print("" + participants.size());
-
         return participants.stream().map(this::transformation).collect(Collectors.toList());
     }
 
@@ -167,22 +168,17 @@ public class Participant {
         Utilisateur utilisateur = new Utilisateur().findById(participant.getUtilisateur().getId());
 
         if (utilisateur == null) {
-            System.out.println("utilisateur == null");
             return "aucun enregistrement correspondant";
         } else {
-            System.out.println("utilisateur != null");
             Evenement evenement = new Evenement().findById(participant.getEvenement().getId());
             if (evenement == null) {
-                System.out.println("evenement == null");
                 return "aucun enregistrement correspondant";
             } else {
                 System.out.println("evenement != null");
                 Participant participantOld = findByEvenementAndUtilisateur(evenement.getId(), utilisateur.getTelephone());
                 if (participantOld != null) {
-                    System.out.println("participantOld != null");
                     return "aucun enregistrement correspondant";
                 } else {
-                    System.out.println("participantOld == null");
                     participant.setUtilisateur(utilisateur);
                     String result = null;
                     try {
@@ -294,5 +290,13 @@ public class Participant {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
     }
 }

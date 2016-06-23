@@ -11,13 +11,15 @@ public class ParticipantPojo {
     private String prenom;
     private String telephone;
     private String image;
+    private String presentation;
 
-    public ParticipantPojo(Long id, String nom, String prenom, String telephone, String image) {
+    public ParticipantPojo(Long id, String nom, String prenom, String telephone, String image, String presentation) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
         this.image = image;
+        this.presentation = presentation;
     }
 
     public ParticipantPojo() {
@@ -28,7 +30,7 @@ public class ParticipantPojo {
      * @return
      */
     public ParticipantPojo transformation(Participant participant) {
-        return new ParticipantPojo(participant.getId(), participant.getUtilisateur().getNom(), participant.getUtilisateur().getPrenom(), participant.getUtilisateur().getTelephone(), participant.getUtilisateur().getImage());
+        return new ParticipantPojo(participant.getId(), participant.getUtilisateur().getNom(), participant.getUtilisateur().getPrenom(), participant.getUtilisateur().getTelephone(), participant.getUtilisateur().getImage(), participant.getUtilisateur().getPresentation());
     }
 
     /**
@@ -78,5 +80,13 @@ public class ParticipantPojo {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
     }
 }
