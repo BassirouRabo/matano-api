@@ -2,7 +2,7 @@ package pojo;
 
 import models.Commentaire;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +11,11 @@ public class CommentairePojo {
     private String nom;
     private String prenom;
     private String telephone;
-    private Date jour;
+    private String jour;
     private String image;
     private String commentaire;
 
-    public CommentairePojo(Long id, String nom, String prenom, String telephone, Date jour, String image, String commentaire) {
+    public CommentairePojo(Long id, String nom, String prenom, String telephone, String jour, String image, String commentaire) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -33,7 +33,7 @@ public class CommentairePojo {
      * @return
      */
     public CommentairePojo transformation(Commentaire commentaire) {
-        return new CommentairePojo(commentaire.getId(), commentaire.getUtilisateur().getNom(), commentaire.getUtilisateur().getPrenom(), commentaire.getUtilisateur().getTelephone(), commentaire.getJour(), commentaire.getUtilisateur().getImage(), commentaire.getCommentaire());
+        return new CommentairePojo(commentaire.getId(), commentaire.getUtilisateur().getNom(), commentaire.getUtilisateur().getPrenom(), commentaire.getUtilisateur().getTelephone(), new SimpleDateFormat("dd/MM/yyyy").format(commentaire.getJour()), commentaire.getUtilisateur().getImage(), commentaire.getCommentaire());
     }
 
     /**
@@ -76,11 +76,11 @@ public class CommentairePojo {
         this.telephone = telephone;
     }
 
-    public Date getJour() {
+    public String getJour() {
         return jour;
     }
 
-    public void setJour(Date jour) {
+    public void setJour(String jour) {
         this.jour = jour;
     }
 
