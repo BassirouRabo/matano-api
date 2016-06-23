@@ -8,6 +8,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import pojo.ActualitePojo;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ public class Actualites extends Controller {
 
     @Transactional
     public Result reads() {
-        return ok(Json.toJson(new Actualite().findList()));
+        return ok(Json.toJson(new ActualitePojo().transformationListe(new Actualite().findList())));
     }
 
     @Transactional
@@ -26,13 +27,13 @@ public class Actualites extends Controller {
         if (actualite == null) {
             return ok("0");
         } else {
-            return ok(Json.toJson(actualite));
+            return ok(Json.toJson(new ActualitePojo().transformation(actualite)));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
-        return ok(Json.toJson(new Actualite().findListByEvenement(idEvenement)));
+        return ok(Json.toJson(new ActualitePojo().transformationListe(new Actualite().findListByEvenement(idEvenement))));
     }
 
     @Transactional

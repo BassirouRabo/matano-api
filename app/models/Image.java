@@ -117,7 +117,7 @@ public class Image {
      * @return
      */
     public String create(Image image) {
-        Utilisateur utilisateur = new Utilisateur().findByTelephone(image.getTelephone());
+        Utilisateur utilisateur = new Utilisateur().findById(image.getUtilisateur().getId());
 
         if (utilisateur == null) {
             return "aucun enregistrement correspondant";
