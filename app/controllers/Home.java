@@ -30,4 +30,22 @@ public class Home extends Controller {
         });
     }
 
+    public LegacyWebSocket<String> socket1() {
+        System.out.println("socket1");
+        return WebSocket.whenReady((in, out) -> {
+
+            in.onMessage((consumer) -> {
+                System.out.println(consumer.toString());
+                System.out.println("onMessage");
+            });
+
+            in.onClose(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("onClose");
+                }
+            });
+        });
+    }
+
 }

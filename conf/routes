@@ -62,7 +62,7 @@ GET        /utilisateurs/:id/delete-account        controllers.Utilisateurs.dele
 GET         /feedbacks        controllers.Feedbacks.reads()
 POST        /feedbacks        controllers.Feedbacks.create()
 
-GET        /websocket        controllers.Home.socket()
+GET        /websocket        controllers.Home.socket1()
 
 
 
