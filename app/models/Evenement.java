@@ -44,7 +44,7 @@ public class Evenement {
      */
     public List findList() {
         try {
-            return JPA.em().createQuery("select evenement From Evenement evenement").getResultList();
+            return JPA.em().createQuery("select evenement From Evenement evenement order by evenement.jour").getResultList();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
@@ -70,7 +70,7 @@ public class Evenement {
      */
     public List findListByCategorie(String categorie) {
         try {
-            return JPA.em().createQuery("select evenement From Evenement evenement where evenement.categorie = :categorie").setParameter("categorie", categorie).getResultList();
+            return JPA.em().createQuery("select evenement From Evenement evenement where evenement.categorie = :categorie order by evenement.jour").setParameter("categorie", categorie).getResultList();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
