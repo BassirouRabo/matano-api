@@ -20,11 +20,11 @@ public class Home extends Controller {
             in.onMessage(System.out::println);
 
             // When the socket is closed.
-            in.onClose(() -> System.out.println("Disconnected"));
+            // in.onClose(() -> System.out.println("Disconnected"));
 
 
             // Send a single 'Hello!' message
-            out.write("Hello!");
+            //   out.write("Hello!");
 
 
         });
