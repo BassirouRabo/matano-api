@@ -7,7 +7,11 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import pojo.ParticipantPojo;
+import utils.Secured;
+import views.html.participant;
+import views.html.participants;
 
 import javax.inject.Inject;
 
@@ -20,13 +24,14 @@ public class Participants extends Controller {
         return ok(Json.toJson(new ParticipantPojo().transformationListe(new Participant().findList())));
     }
 
+    @Security.Authenticated(Secured.class)
     @Transactional
     public Result read(Long id) {
-        Participant participant = new Participant().findById(id);
-        if (participant == null) {
-            return ok("0");
+        Participant participantExiste = new Participant().findById(id);
+        if (participantExiste == null) {
+            return ok(participant.render(new Participant()));
         } else {
-            return ok(Json.toJson(new ParticipantPojo().transformation(participant)));
+            return ok(participant.render(participantExiste));
         }
     }
 
@@ -34,6 +39,13 @@ public class Participants extends Controller {
     public Result readsByEvenement(Long idEvenement) {
         return ok(Json.toJson(new ParticipantPojo().transformationListe(new Participant().findListByEvenement(idEvenement))));
     }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByPartenaire(Long idPartenaire) {
+        return ok(participants.render(new Participant().findListByPartenaire(idPartenaire)));
+    }
+
 
     @Transactional
     public Result create() {
@@ -63,7 +75,7 @@ public class Participants extends Controller {
     }
 
     @Transactional
-    public Result deleteByEvenementAndUtilisateur(Long idEvenement, Long idUtilisateur){
+    public Result deleteByEvenementAndUtilisateur(Long idEvenement, Long idUtilisateur) {
         String result = new Participant().deleteByEvenementAndUtilisateur(idEvenement, idUtilisateur);
         if (result != null) {
             return ok("0");

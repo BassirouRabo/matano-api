@@ -70,13 +70,12 @@ public class Utilisateur {
     }
 
     /**
-     *
      * @param telephone
      * @return
      */
     public Utilisateur findByTelephone(String telephone) {
         try {
-            return (Utilisateur)JPA.em().createQuery("select utilisateur From Utilisateur utilisateur WHERE utilisateur.telephone = :telephone").setParameter("telephone", telephone).getSingleResult();
+            return (Utilisateur) JPA.em().createQuery("select utilisateur From Utilisateur utilisateur WHERE utilisateur.telephone = :telephone").setParameter("telephone", telephone).getSingleResult();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
@@ -84,7 +83,6 @@ public class Utilisateur {
     }
 
     /**
-     *
      * @param telephone
      * @param password
      * @return
@@ -99,16 +97,15 @@ public class Utilisateur {
     }
 
     /**
-     *
      * @param utilisateur
      * @return
      */
     public String create(Utilisateur utilisateur) {
         Utilisateur utilisateurOld = findByTelephone(utilisateur.getTelephone());
 
-        if(utilisateurOld != null){
+        if (utilisateurOld != null) {
             return "existe";
-        }else{
+        } else {
             String result = null;
             try {
                 JPA.em().persist(utilisateur);

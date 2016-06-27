@@ -8,7 +8,11 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import pojo.ActualitePojo;
+import utils.Secured;
+import views.html.actualite;
+import views.html.actualites;
 
 import javax.inject.Inject;
 
@@ -21,19 +25,26 @@ public class Actualites extends Controller {
         return ok(Json.toJson(new ActualitePojo().transformationListe(new Actualite().findList())));
     }
 
+    @Security.Authenticated(Secured.class)
     @Transactional
     public Result read(Long id) {
-        Actualite actualite = new Actualite().findById(id);
-        if (actualite == null) {
-            return ok("0");
+        Actualite actualiteExiste = new Actualite().findById(id);
+        if (actualiteExiste == null) {
+            return ok(actualite.render(new Actualite()));
         } else {
-            return ok(Json.toJson(new ActualitePojo().transformation(actualite)));
+            return ok(actualite.render(actualiteExiste));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
         return ok(Json.toJson(new ActualitePojo().transformationListe(new Actualite().findListByEvenement(idEvenement))));
+    }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByPartenaire(Long idPartenaire) {
+        return ok(actualites.render((new Actualite().findListByPartenaire(idPartenaire))));
     }
 
     @Transactional

@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "evenement")
 public class Evenement {
+    @ManyToOne
+    protected Partenaire partenaire;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -37,7 +39,6 @@ public class Evenement {
     private String video;
     @Column(name = "imagefull")
     private String imagefull;
-
 
     /**
      * @return
@@ -75,7 +76,19 @@ public class Evenement {
             System.out.println(e.toString());
             return null;
         }
+    }
 
+    /**
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByPartenaire(Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select evenement From Evenement evenement where evenement.partenaire.id = :idPartenaire order by evenement.jour DESC").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
     }
 
     /**

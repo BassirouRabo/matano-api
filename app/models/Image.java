@@ -55,7 +55,6 @@ public class Image {
     }
 
     /**
-     *
      * @param image
      * @return
      */
@@ -99,7 +98,19 @@ public class Image {
     }
 
     /**
-     *
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByPartenaire(Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select image From Image image where image.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param idUtilisteur
      * @return
      */

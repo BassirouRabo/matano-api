@@ -16,69 +16,69 @@ public class Utilisateurs extends Controller {
     FormFactory formFactory;
 
     @Transactional
-    public Result reads(){
+    public Result reads() {
         return ok(Json.toJson(new Utilisateur().findList()));
     }
 
     @Transactional
-    public Result read(Long id){
+    public Result read(Long id) {
         Utilisateur utilisateur = new Utilisateur().findById(id);
-        if(utilisateur == null){
+        if (utilisateur == null) {
             return ok("0");
-        }else{
+        } else {
             return ok(Json.toJson(utilisateur));
         }
     }
 
     @Transactional
-    public Result readByTelephone(String telephone){
+    public Result readByTelephone(String telephone) {
         Utilisateur utilisateur = new Utilisateur().findByTelephone(telephone);
-        if(utilisateur == null){
+        if (utilisateur == null) {
             return ok("0");
-        }else{
+        } else {
             return ok(Json.toJson(utilisateur));
         }
     }
 
     @Transactional
-    public Result inscription(){
+    public Result inscription() {
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
             return ok("0");
-        }else{
+        } else {
             Utilisateur utilisateur = form.get();
             String result = utilisateur.create(utilisateur);
-            if(result == null){
+            if (result == null) {
                 return ok(utilisateur.findByTelephone(utilisateur.getTelephone()).getId().toString());
-            }else{
+            } else {
                 return ok("0");
             }
         }
     }
 
     @Transactional
-    public Result connexion(){
+    public Result connexion() {
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
             return ok("0");
-        }else{
+        } else {
             Utilisateur utilisateur = form.get();
-            Utilisateur  utilisateurExiste =  utilisateur.findByTelephoneAndPassword(utilisateur.getTelephone(), utilisateur.getPassword());
+            Utilisateur utilisateurExiste = utilisateur.findByTelephoneAndPassword(utilisateur.getTelephone(), utilisateur.getPassword());
 
-            if(utilisateurExiste == null){
+            if (utilisateurExiste == null) {
                 return ok("0");
-            }else{
+            } else {
                 return ok("1");
             }
         }
     }
 
     @Transactional
-    public Result update(){
+    public Result update() {
         Form<Utilisateur> form = formFactory.form(Utilisateur.class).bindFromRequest();
         if (form.hasErrors()) {
             return ok("0");
-        }else{
+        } else {
             Utilisateur utilisateur = form.get();
             String result = utilisateur.update(utilisateur);
             if (result == null) {

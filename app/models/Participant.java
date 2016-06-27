@@ -53,7 +53,6 @@ public class Participant {
     }
 
     /**
-     *
      * @param idUtilisateur
      * @return
      */
@@ -67,7 +66,6 @@ public class Participant {
     }
 
     /**
-     *
      * @param participant
      * @return
      */
@@ -154,6 +152,19 @@ public class Participant {
     public List findListByEvenement(Long idEvenement) {
         try {
             return JPA.em().createQuery("select participant From Participant participant where participant.evenement.id = :idEvenement").setParameter("idEvenement", idEvenement).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByPartenaire(Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select participant From Participant participant where participant.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;

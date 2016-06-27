@@ -7,7 +7,11 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import pojo.EvenementPojo;
+import utils.Secured;
+import views.html.evenement;
+import views.html.evenements;
 
 import javax.inject.Inject;
 
@@ -26,18 +30,25 @@ public class Evenements extends Controller {
         return ok(Json.toJson(new EvenementPojo().transformationListe(new Evenement().findListByCategorie(categorie))));
     }
 
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByPartenaire(Long idPatenaire) {
+        return ok(evenements.render(new Evenement().findListByPartenaire(idPatenaire)));
+    }
+
+    @Security.Authenticated(Secured.class)
     @Transactional
     public Result read(Long id) {
-        Evenement evenement = new Evenement().findById(id);
-        if (evenement == null) {
-            return ok("0");
+        Evenement evenementExiste = new Evenement().findById(id);
+        if (evenementExiste == null) {
+            return ok(evenement.render(new Evenement()));
         } else {
-            return ok(Json.toJson(new EvenementPojo().transformation(evenement)));
+            return ok(evenement.render(evenementExiste));
         }
     }
 
     @Transactional
-    public Result readsByUtilisateur(Long idUtilisateur){
+    public Result readsByUtilisateur(Long idUtilisateur) {
         return ok(Json.toJson(new EvenementPojo().transformationListe(new Evenement().findListByUtilisateur(idUtilisateur))));
     }
 

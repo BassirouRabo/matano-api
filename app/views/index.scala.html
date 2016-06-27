@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Matano ?</title>
+
+        <link href="@routes.Assets.versioned("css/bootstrap.min.css")" rel="stylesheet">
+        <link href="@routes.Assets.versioned("css/signin.css")" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <div class="container">
+            <form class="form-signin" method="post" action="/partenaires/connexion">
+                <h2 class="form-signin-heading text-center">Matano ?</h2>
+                <label for="telephone" class="sr-only">N° téléphone</label>
+                <input name="telephone" type="tel" id="telephone" class="form-control" placeholder="N° téléphone" required autofocus>
+                <label for="password" class="sr-only">Password</label>
+                <input name="password" type="password" id="password" class="form-control" placeholder="Password" required>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </form>
+        </div>
+
+        <script src="@routes.Assets.versioned("js/bootstrap.min.js")"></script>
+    </body>
+</html>

@@ -55,15 +55,14 @@ public class Commentaire {
     }
 
     /**
-     *
      * @param commentaire
      * @return
      */
-    public Commentaire transformation(Commentaire commentaire){
+    public Commentaire transformation(Commentaire commentaire) {
         Utilisateur utilisateur = new Utilisateur().findById(commentaire.getUtilisateur().getId());
-        if(utilisateur == null){
+        if (utilisateur == null) {
             return null;
-        }else {
+        } else {
             commentaire.setNom(utilisateur.getNom());
             commentaire.setPrenom(utilisateur.getPrenom());
             commentaire.setTelephone(utilisateur.getTelephone());
@@ -99,7 +98,19 @@ public class Commentaire {
     }
 
     /**
-     *
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByPartenaire(Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select commentaire From Commentaire commentaire where commentaire.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param idUtilisateur
      * @return
      */

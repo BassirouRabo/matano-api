@@ -5,13 +5,14 @@ import play.mvc.Controller;
 import play.mvc.LegacyWebSocket;
 import play.mvc.Result;
 import play.mvc.WebSocket;
+import views.html.index;
 
 
 public class Home extends Controller {
 
     @Transactional
     public Result index() {
-        return ok("matano ?");
+        return ok(index.render());
     }
 
     public LegacyWebSocket<String> socket() {

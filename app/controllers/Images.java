@@ -7,7 +7,11 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import pojo.ImagePojo;
+import utils.Secured;
+import views.html.image;
+import views.html.images;
 
 import javax.inject.Inject;
 
@@ -21,19 +25,26 @@ public class Images extends Controller {
         return ok(Json.toJson(new ImagePojo().transformationListe(new Image().findList())));
     }
 
+    @Security.Authenticated(Secured.class)
     @Transactional
     public Result read(Long id) {
-        Image image = new Image().findById(id);
-        if (image == null) {
-            return ok("0");
+        Image imageExiste = new Image().findById(id);
+        if (imageExiste == null) {
+            return ok(image.render(new Image()));
         } else {
-            return ok(Json.toJson(new ImagePojo().transformation(image)));
+            return ok(image.render(imageExiste));
         }
     }
 
     @Transactional
     public Result readsByEvenement(Long idEvenement) {
         return ok(Json.toJson(new ImagePojo().transformationListe(new Image().findListByEvenement(idEvenement))));
+    }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByPartenaire(Long idPartenaire) {
+        return ok(images.render(new Image().findListByPartenaire(idPartenaire)));
     }
 
     @Transactional

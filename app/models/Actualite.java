@@ -58,6 +58,19 @@ public class Actualite {
     }
 
     /**
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByPartenaire(Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select actualite From Actualite actualite where actualite.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param actualite
      * @return
      */

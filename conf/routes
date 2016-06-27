@@ -7,6 +7,7 @@ GET         /                                            controllers.Home.index
 # Evenement
 GET         /evenements                                  controllers.Evenements.reads()
 GET         /evenements/categories/:categorie            controllers.Evenements.readsByCategorie(categorie: String)
+GET         /evenements/partenaires/:idPartenaire           controllers.Evenements.readsByPartenaire(idPartenaire: Long)
 GET        /evenements/utilisateurs/:idUtilisateur        controllers.Evenements.readsByUtilisateur(idUtilisateur: Long)
 GET         /evenements/:id                              controllers.Evenements.read(id: Long)
 POST        /evenements                                  controllers.Evenements.create()
@@ -18,6 +19,7 @@ GET         /evenements/:id/delete                     controllers.Evenements.de
 GET         /actualites                                  controllers.Actualites.reads()
 GET         /actualites/:id                              controllers.Actualites.read(id: Long)
 GET         /actualites/evenements/:idEvenement          controllers.Actualites.readsByEvenement(idEvenement: Long)
+GET         /actualites/partenaires/:idPartenaire       controllers.Actualites.readsByPartenaire(idPartenaire: Long)
 POST        /actualites                                  controllers.Actualites.create()
 POST        /actualites/update                         controllers.Actualites.update()
 GET         /actualites/:id/delete                     controllers.Actualites.delete(id: Long)
@@ -27,6 +29,7 @@ GET         /actualites/:id/delete                     controllers.Actualites.de
 GET         /commentaires                                controllers.Commentaires.reads()
 GET         /commentaires/:id                            controllers.Commentaires.read(id: Long)
 GET         /commentaires/evenements/:idEvenement        controllers.Commentaires.readsByEvenement(idEvenement: Long)
+GET         /commentaires/partenaires/:idPartenaire      controllers.Commentaires.readsByPartenaire(idPartenaire: Long)
 POST        /commentaires                                controllers.Commentaires.create()
 POST        /commentaires/update                       controllers.Commentaires.update()
 GET         /commentaires/:id/delete                   controllers.Commentaires.delete(id: Long)
@@ -36,6 +39,7 @@ GET         /commentaires/:id/delete                   controllers.Commentaires.
 GET        /participants                                  controllers.Participants.reads()
 GET         /participants/:id                            controllers.Participants.read(id: Long)
 GET         /participants/evenements/:idEvenement        controllers.Participants.readsByEvenement(idEvenement: Long)
+GET         /participants/partenaires/:idPartenaire      controllers.Participants.readsByPartenaire(idPartenaire: Long)
 POST        /participants                                controllers.Participants.create()
 GET        /participants/:id/delete        controllers.Participants.delete(id: Long)
 GET        /participants/evenements/:idEvenement/utilisateurs/:idUtilisateur        controllers.Participants.deleteByEvenementAndUtilisateur(idEvenement: Long, idUtilisateur: Long)
@@ -44,6 +48,7 @@ GET        /participants/evenements/:idEvenement/utilisateurs/:idUtilisateur    
 GET         /images                                      controllers.Images.reads()
 GET         /images/:id                                  controllers.Images.read(id: Long)
 GET         /images/evenements/:idEvenement              controllers.Images.readsByEvenement(idEvenement: Long)
+GET         /images/partenaires/:idPartenaire           controllers.Images.readsByPartenaire(idPartenaire: Long)
 POST        /images                                      controllers.Images.create()
 GET         /images/:id/delete                         controllers.Images.delete(id: Long)
 
@@ -57,6 +62,13 @@ GET         /utilisateurs/telephones/:telephone        controllers.Utilisateurs.
 POST        /utilisateurs/update                       controllers.Utilisateurs.update()
 GET         /utilisateurs/:id/delete                   controllers.Utilisateurs.delete(id: Long)
 GET        /utilisateurs/:id/delete-account        controllers.Utilisateurs.deleteAccount(id: Long)
+
+
+# Partenaire
+GET         /partenaires                            controllers.Partenaires.reads()
+GET         /partenaires/:idPartenaire              controllers.Partenaires.read(idPartenaire: Long)
+POST        /partenaires/connexion                  controllers.Partenaires.connexion()
+
 
 # Feedback
 GET         /feedbacks        controllers.Feedbacks.reads()
