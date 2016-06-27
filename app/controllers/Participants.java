@@ -12,6 +12,7 @@ import pojo.ParticipantPojo;
 import utils.Secured;
 import views.html.participant;
 import views.html.participants;
+import views.html.participantss;
 
 import javax.inject.Inject;
 
@@ -46,6 +47,11 @@ public class Participants extends Controller {
         return ok(participants.render(new Participant().findListByPartenaire(idPartenaire)));
     }
 
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        return ok(participantss.render(new Participant().findListByEvenementAndPartenaire(idEvenement, idPartenaire)));
+    }
 
     @Transactional
     public Result create() {

@@ -1,1 +1,78 @@
 @(evenement: Evenement)
+
+@main("Evenement") {
+    <form method="post" action="/evenements/@evenement.getId/update" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="categorie">Catégorie</label>
+            <select name="categorie" class="form-control" id="categorie" required="required">
+                <option value="Culture">Culture</option>
+                <option value="Education">Education</option>
+                <option value="Sport">Sport</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rubrique">Rubrique</label>
+            <input type="text" name="rubrique" class="form-control" id="rubrique" required="required" value="@evenement.getRubrique">
+        </div>
+
+        <div class="form-group">
+            <label for="titre">Titre</label>
+            <input type="text" name="titre" class="form-control" id="titre" required="required" value="@evenement.getTitre">
+        </div>
+
+        <div class="form-group">
+            <label for="tarif">Tarif</label>
+            <input name="tarif" type="text" class="form-control" id="tarif" required="required" value="@evenement.getTarif">
+        </div>
+
+        <div class="form-group">
+            <label for="lieu">Lieu</label>
+            <input type="text" name="lieu" class="form-control" id="lieu" required="required" value="@evenement.getLieu">
+        </div>
+
+        <div class="form-group">
+            <label for="presentation">Présentation</label>
+            <textarea name="presentation" class="form-control" rows="3" id="presentation" required="required">@evenement.getPresentation</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="horaire">Horaire</label>
+            <input name="horaire" type="text" class="form-control" id="horaire" required="required" value="@evenement.getHoraire">
+        </div>
+
+        <div class="form-group">
+            <label for="lien">Lien</label>
+            <input name="lien" type="text" class="form-control" id="lien" required="required" value="@evenement.getLien">
+        </div>
+
+        <div class="form-group">
+            <label for="jour">Jour</label>
+            <input name="jour" type="date" class="form-control" id="jour" required="required" value="@evenement.getJour.format("yyyy-MM-dd")">
+        </div>
+
+        <div class="form-group">
+            <label for="video">Vidéo</label>
+            <input name="video" type="text" class="form-control" id="video" max="10" value="@evenement.getVideo">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image cover (480 * 270)</label>
+            @if(!evenement.getTitre.equals("")) {
+                <img src="@evenement.getImage" alt="@evenement.getTitre" width="140" height="140" class="img-thumbnail">
+            }
+            <input name="image" type="file" id="image" width="480" height="270" value="@evenement.getImage">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image Full (896 * 1364) max 1.5 Mo</label>
+            @if(!evenement.getTitre.equals("")) {
+                <img src="@evenement.getImagefull" alt="@evenement.getTitre" width="140" height="140" class="img-thumbnail">
+            }
+            <input name="imagefull" type="file" id="image-full" width="1364" height="1364" value="@evenement.getImagefull">
+        </div>
+
+        <input type="hidden" name="id" value="@evenement.getId">
+
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </form>
+}

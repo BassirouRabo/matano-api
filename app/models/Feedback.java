@@ -1,5 +1,6 @@
 package models;
 
+import play.data.format.Formats;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Feedback {
     @Column(name = "message")
     private String message;
     @Column(name = "jour")
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
     private Date jour;
 
 

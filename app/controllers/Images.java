@@ -12,6 +12,7 @@ import pojo.ImagePojo;
 import utils.Secured;
 import views.html.image;
 import views.html.images;
+import views.html.imagess;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,12 @@ public class Images extends Controller {
     @Transactional
     public Result readsByPartenaire(Long idPartenaire) {
         return ok(images.render(new Image().findListByPartenaire(idPartenaire)));
+    }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        return ok(imagess.render(new Image().findListByEvenementAndPartenaire(idEvenement, idPartenaire)));
     }
 
     @Transactional

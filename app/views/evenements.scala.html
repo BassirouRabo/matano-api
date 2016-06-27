@@ -1,2 +1,37 @@
 @import java.util
 @(evenements: util.List[models.Evenement])
+
+@main("Evènements") {
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Jour</th>
+                <th>Catégorie</th>
+                <th>Rubrique</th>
+                <th>Titre</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+                <th>Actualite</th>
+                <th>Commentaire</th>
+                <th>Image</th>
+                <th>Participant</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(evenement <- evenements) {
+            <tr>
+                <td>@evenement.getJour.format("mm/dd/yyyy")</td>
+                <td>@evenement.getCategorie</td>
+                <td>@evenement.getRubrique</td>
+                <td>@evenement.getTitre</td>
+                <td><a href="/evenements/@evenement.getId" title="Modifer" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td><a href="/evenements/@evenement.getId/delete" title="Suppression" data-toggle="tooltip" data-placement="top" onclick="return window.confirm('Voulez vous supprimez ?');" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                <td><a href="/actualites/evenements/@evenement.getId/partenaires/@session().get("id")" title="Actualité" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a></td>
+                <td><a href="/commentaires/evenements/@evenement.getId/partenaires/@session().get("id")" title="Commentaire" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a></td>
+                <td><a href="/images/evenements/@evenement.getId/partenaires/@session().get("id")" title="Image" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a></td>
+                <td><a href="/participants/evenements/@evenement.getId/partenaires/@session().get("id")" title="Participant" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

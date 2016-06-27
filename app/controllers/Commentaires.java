@@ -12,6 +12,7 @@ import pojo.CommentairePojo;
 import utils.Secured;
 import views.html.commentaire;
 import views.html.commentaires;
+import views.html.commentairess;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,12 @@ public class Commentaires extends Controller {
     @Transactional
     public Result readsByPartenaire(Long idPartenaire) {
         return ok(commentaires.render(new Commentaire().findListByPartenaire(idPartenaire)));
+    }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        return ok(commentairess.render(new Commentaire().findListByEvenementAndPartenaire(idEvenement, idPartenaire)));
     }
 
     @Transactional

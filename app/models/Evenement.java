@@ -1,5 +1,6 @@
 package models;
 
+import play.data.format.Formats;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Evenement {
     @Column(name = "lien")
     private String lien;
     @Column(name = "jour")
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
     private Date jour;
     @Column(name = "video")
     private String video;

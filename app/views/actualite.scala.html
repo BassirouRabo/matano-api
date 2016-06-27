@@ -1,1 +1,24 @@
 @(actualite: Actualite)
+
+    @main("Actualité") {
+        <form method="post" action="/actualites/update">
+
+            <div class="form-group">
+                <label for="jour">Jour</label>
+                <input type="date" name="jour" class="form-control" id="jour" required="required">
+            </div>
+
+            <div class="form-group">
+                <label for="actualite">Actualité</label>
+                <textarea name="actualite" class="form-control" id="actualite" required="required">
+
+                </textarea>
+            </div>
+
+            <input type="hidden" name="id" value="@actualite.getId">
+            <input type="hidden" name="evenement.id" value="@actualite.getEvenement.getId">
+
+            <button type="submit" class="btn btn-primary">Modifier</button>
+
+        </form>
+    }

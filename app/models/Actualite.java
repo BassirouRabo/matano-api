@@ -1,5 +1,6 @@
 package models;
 
+import play.data.format.Formats;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Actualite {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "jour")
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
     private Date jour;
     @Column(name = "actualite")     // text
     private String actualite;
@@ -64,6 +66,20 @@ public class Actualite {
     public List findListByPartenaire(Long idPartenaire) {
         try {
             return JPA.em().createQuery("select actualite From Actualite actualite where actualite.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
+     * @param idEvenement
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select actualite From Actualite actualite where actualite.evenement.id = :idEvenement And actualite.evenement.partenaire.id = :idPartenaire").setParameter("idEvenement", idEvenement).setParameter("idPartenaire", idPartenaire).getResultList();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;

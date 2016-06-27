@@ -172,6 +172,21 @@ public class Participant {
     }
 
     /**
+     *
+     * @param idEvenement
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select participant From Participant participant where participant.evenement.id = :idEvenement And participant.evenement.partenaire.id = :idPartenaire").setParameter("idEvenement", idEvenement).setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
      * @param participant
      * @return
      */

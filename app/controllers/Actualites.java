@@ -13,6 +13,7 @@ import pojo.ActualitePojo;
 import utils.Secured;
 import views.html.actualite;
 import views.html.actualites;
+import views.html.actualitess;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,12 @@ public class Actualites extends Controller {
     @Transactional
     public Result readsByPartenaire(Long idPartenaire) {
         return ok(actualites.render((new Actualite().findListByPartenaire(idPartenaire))));
+    }
+
+    @Security.Authenticated(Secured.class)
+    @Transactional
+    public Result readsByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        return ok(actualitess.render((new Actualite().findListByEvenementAndPartenaire(idEvenement, idPartenaire))));
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package models;
 
+import play.data.format.Formats;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "jour")
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
     private Date jour;
     @Column(name = "imagegalerie")
     private String imagegalerie;
@@ -104,6 +106,20 @@ public class Image {
     public List findListByPartenaire(Long idPartenaire) {
         try {
             return JPA.em().createQuery("select image From Image image where image.evenement.partenaire.id = :idPartenaire").setParameter("idPartenaire", idPartenaire).getResultList();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+    /**
+     * @param idEvenement
+     * @param idPartenaire
+     * @return
+     */
+    public List findListByEvenementAndPartenaire(Long idEvenement, Long idPartenaire) {
+        try {
+            return JPA.em().createQuery("select image From Image image where image.evenement.id = :idEvenement And image.evenement.partenaire.id = :idPartenaire").setParameter("idEvenement", idEvenement).setParameter("idPartenaire", idPartenaire).getResultList();
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
