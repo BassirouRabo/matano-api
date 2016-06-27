@@ -11,17 +11,23 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Image</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
         @for(participant <- participants) {
             <tr>
                 <td>@participant.getEvenement.getTitre</td>
-                <td>@participant.getEvenement.getCategorie/td>
+                <td>@participant.getEvenement.getCategorie</td>
                 <td>@participant.getEvenement.getJour.format("dd-MM-yyyy")</td>
                 <td>@participant.getUtilisateur.getNom</td>
                 <td>@participant.getUtilisateur.getPrenom</td>
-                <td><img src="@participant.getUtilisateur.getImage" alt="@participant.getUtilisateur.getNom" width="140" height="140" class="img-thumbnail"></td>
+                <td>
+                @if(!participant.getUtilisateur.getImage.equals("")) {
+                    <img src="@participant.getUtilisateur.getImage" alt="@participant.getUtilisateur.getNom" width="140" height="140" class="img-thumbnail">
+                    }
+                </td>
+                <td><a href="/@participant.getId/delete" title="Suppression" data-toggle="tooltip" data-placement="top" onclick="return window.confirm('Voulez vous supprimez ?');" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
             </tr>
         }
         </tbody>

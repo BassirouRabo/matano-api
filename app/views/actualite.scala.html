@@ -5,13 +5,13 @@
 
             <div class="form-group">
                 <label for="jour">Jour</label>
-                <input type="date" name="jour" class="form-control" id="jour" required="required">
+                <input type="date" name="jour" class="form-control" id="jour" required="required" value="@actualite.getJour.format("yyyy-MM-dd")">
             </div>
 
             <div class="form-group">
                 <label for="actualite">Actualité</label>
                 <textarea name="actualite" class="form-control" id="actualite" required="required">
-
+                    @actualite.getActualite
                 </textarea>
             </div>
 
