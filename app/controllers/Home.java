@@ -18,14 +18,16 @@ public class Home extends Controller {
     public LegacyWebSocket<String> socket() {
         return WebSocket.whenReady((in, out) -> {
             // For each event received on the socket,
-            in.onMessage(System.out::println);
+            in.onMessage((message) -> {
+                System.out.println("message " + message);
+            });
 
             // When the socket is closed.
-            // in.onClose(() -> System.out.println("Disconnected"));
+            in.onClose(() -> System.out.println("Disconnected"));
 
 
             // Send a single 'Hello!' message
-            //   out.write("Hello!");
+            out.write("Hello!");
 
 
         });
