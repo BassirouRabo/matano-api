@@ -73,6 +73,8 @@ GET         /partenaires                            controllers.Partenaires.read
 GET         /partenaires/:idPartenaire              controllers.Partenaires.read(idPartenaire: Long)
 POST        /partenaires/connexion                  controllers.Partenaires.connexion()
 
+GET         /api/partenaires                        controllers.Home.api()
+
 
 # Feedback
 GET         /feedbacks        controllers.Feedbacks.reads()

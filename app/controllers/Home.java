@@ -51,4 +51,8 @@ public class Home extends Controller {
         });
     }
 
+    public Result api() {
+        return ok("Partenaires");
+    }
+
 }
